@@ -1,0 +1,11 @@
+incorrect_stt,corrected_text,category,notes
+보아스가 룻을 안으로 받아들였다,보아스가 룻을 아내로 받아들였다,STT_ERROR,Example of similar-sounding Korean phrase correction
+룻의 삶,룻의 삶,NO_CHANGE,Included as a safe example where no correction is needed
+하나님의 은에,하나님의 은혜,STT_ERROR,Common recognition issue for theological term
+배들레헴,베들레헴,STT_ERROR,Bible place name correction
+나오미가 모합에서,나오미가 모압에서,STT_ERROR,Bible place name correction
+믿음의 결단을 내립니다,믿음의 결단을 내립니다,NO_CHANGE,Valid phrase example
+성경 말슴,성경 말씀,STT_ERROR,Common Korean STT spelling correction
+하나님이 우리를 인도하심니다,하나님이 우리를 인도하십니다,STT_ERROR,Polite/formal ending correction
+예수 그리스도께서 우리를 구언하셨습니다,예수 그리스도께서 우리를 구원하셨습니다,STT_ERROR,Theological term correction
+오늘 본문은 룻기입니다,오늘 본문은 룻기입니다,NO_CHANGE,Valid Bible book reference example
