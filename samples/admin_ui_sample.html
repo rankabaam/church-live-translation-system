@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Church Live Translation Admin Sample</title>
+
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f4f6f8;
+      color: #1f2933;
+    }
+
+    header {
+      background: #1f2937;
+      color: white;
+      padding: 24px 28px;
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 26px;
+    }
+
+    header p {
+      margin: 8px 0 0;
+      color: #d1d5db;
+      font-size: 14px;
+    }
+
+    main {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 28px 16px 48px;
+    }
+
+    .notice {
+      background: #fff7ed;
+      border: 1px solid #fed7aa;
+      border-radius: 10px;
+      padding: 14px 16px;
+      margin-bottom: 20px;
+      font-size: 14px;
+      color: #7c2d12;
+      line-height: 1.5;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin-bottom: 22px;
+    }
+
+    .card {
+      background: white;
+      border: 1px solid #e5e7eb;
+      border-radius: 14px;
+      padding: 18px;
+      box-shadow: 0 3px 10px rgba(15, 23, 42, 0.05);
+    }
+
+    .card h2 {
+      margin: 0 0 10px;
+      font-size: 14px;
+      color: #64748b;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    .status {
+      font-size: 22px;
+      font-weight: 700;
+      color: #111827;
+    }
+
+    .status.good {
+      color: #047857;
+    }
+
+    .status.waiting {
+      color: #b45309;
+    }
+
+    .status.info {
+      color: #2563eb;
+    }
+
+    .controls {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 22px;
+    }
+
+    button {
+      border: none;
+      border-radius: 8px;
+      padding: 11px 14px;
+      font-size: 14px;
+      cursor: pointer;
+      background: #1f2937;
+      color: white;
+    }
+
+    button.secondary {
+      background: #475569;
+    }
+
+    button.warning {
+      background: #b45309;
+    }
+
+    button.danger {
+      background: #b91c1c;
+    }
+
+    button:hover {
+      opacity: 0.9;
+    }
+
+    .panel {
+      background: white;
+      border: 1px solid #e5e7eb;
+      border-radius: 14px;
+      padding: 20px;
+      margin-bottom: 20px;
+      box-shadow: 0 3px 10px rgba(15, 23, 42, 0.05);
+    }
+
+    .panel h2 {
+      margin: 0 0 14px;
+      font-size: 20px;
+    }
+
+    .row {
+      display: grid;
+      grid-template-columns: 180px 1fr;
+      gap: 12px;
+      padding: 10px 0;
+      border-bottom: 1px solid #edf2f7;
+      font-size: 14px;
+    }
+
+    .row:last-child {
+      border-bottom: none;
+    }
+
+    .label {
+      color: #64748b;
+      font-weight: 700;
+    }
+
+    .output-box {
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: 10px;
+      padding: 14px;
+      line-height: 1.6;
+      font-size: 15px;
+      margin-bottom: 12px;
+    }
+
+    .output-box .small {
+      color: #64748b;
+      font-size: 13px;
+      margin-bottom: 6px;
+    }
+
+    .log-list {
+      margin: 0;
+      padding-left: 20px;
+      line-height: 1.7;
+      font-size: 14px;
+      color: #334155;
+    }
+
+    footer {
+      text-align: center;
+      color: #94a3b8;
+      font-size: 13px;
+      padding: 24px 16px;
+    }
+
+    @media (max-width: 800px) {
+      .grid {
+        grid-template-columns: 1fr;
+      }
+
+      .row {
+        grid-template-columns: 1fr;
+      }
+
+      header {
+        padding: 22px 18px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <h1>Translation Admin Dashboard</h1>
+    <p>Sample admin interface for monitoring a live church translation workflow</p>
+  </header>
+
+  <main>
+    <div class="notice">
+      This is a fictional portfolio demo. It does not contain real admin URLs,
+      private church infrastructure, audio device identifiers, production credentials,
+      real service logs, or personal information.
+    </div>
+
+    <section class="grid">
+      <div class="card">
+        <h2>Session Status</h2>
+        <div class="status good">Active</div>
+      </div>
+
+      <div class="card">
+        <h2>Audio Input</h2>
+        <div class="status info">Detected</div>
+      </div>
+
+      <div class="card">
+        <h2>Viewer Updates</h2>
+        <div class="status waiting">Waiting</div>
+      </div>
+    </section>
+
+    <section class="controls">
+      <button>Start Session</button>
+      <button class="secondary">Pause Translation</button>
+      <button class="warning">Clear Session</button>
+      <button class="danger">Reset Demo</button>
+    </section>
+
+    <section class="panel">
+      <h2>System Status</h2>
+
+      <div class="row">
+        <div class="label">Service</div>
+        <div>Sample Sunday Service</div>
+      </div>
+
+      <div class="row">
+        <div class="label">Source Language</div>
+        <div>Korean</div>
+      </div>
+
+      <div class="row">
+        <div class="label">Target Language</div>
+        <div>English</div>
+      </div>
+
+      <div class="row">
+        <div class="label">Session Memory</div>
+        <div>Last 5 viewer-ready segments stored</div>
+      </div>
+
+      <div class="row">
+        <div class="label">Public Viewer</div>
+        <div>Connected to sample viewer page</div>
+      </div>
+    </section>
+
+    <section class="panel">
+      <h2>Latest Translation Preview</h2>
+
+      <div class="output-box">
+        <div class="small">Raw STT Sample</div>
+        오늘 말씀을 통해 우리가 하나님의 은혜를 다시 기억하기 원합니다.
+      </div>
+
+      <div class="output-box">
+        <div class="small">Cleaned Source</div>
+        오늘 말씀을 통해 우리가 하나님의 은혜를 다시 기억하기 원합니다.
+      </div>
+
+      <div class="output-box">
+        <div class="small">Viewer Output</div>
+        Through today's message, we want to remember God's grace again.
+      </div>
+    </section>
+
+    <section class="panel">
+      <h2>Recent Admin Events</h2>
+
+      <ul class="log-list">
+        <li>11:00 AM — Sample session started.</li>
+        <li>11:03 AM — First viewer-ready segment created.</li>
+        <li>11:04 AM — Glossary term matched: Ruth → Ruth.</li>
+        <li>11:06 AM — Session memory updated with recent segment.</li>
+        <li>11:08 AM — Public viewer waiting for next translation.</li>
+      </ul>
+    </section>
+  </main>
+
+  <footer>
+    Sample admin interface for portfolio demonstration only.
+  </footer>
+</body>
+</html>
