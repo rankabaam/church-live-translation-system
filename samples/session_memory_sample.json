@@ -1,0 +1,82 @@
+{
+  "note": "Fictional sample session memory data for portfolio demonstration only. No real sermon logs, private church data, viewer analytics, personal information, or production credentials are included.",
+  "session": {
+    "session_id": "SAMPLE-SESSION-2026-05-15-1100",
+    "service_name": "Sample Sunday Service",
+    "source_language": "ko",
+    "target_language": "en",
+    "status": "active_demo",
+    "memory_policy": {
+      "retention_type": "recent_segments",
+      "max_segments": 5,
+      "manual_clear_available": true
+    }
+  },
+  "recent_segments": [
+    {
+      "segment_id": "SEG-001",
+      "timestamp": "2026-05-15T11:03:12",
+      "source_language": "ko",
+      "target_language": "en",
+      "display_text": "Through today's message, we want to remember God's grace again.",
+      "status": "final"
+    },
+    {
+      "segment_id": "SEG-002",
+      "timestamp": "2026-05-15T11:04:38",
+      "source_language": "ko",
+      "target_language": "en",
+      "display_text": "Ruth experiences God's protection through Boaz.",
+      "status": "final"
+    },
+    {
+      "segment_id": "SEG-003",
+      "timestamp": "2026-05-15T11:06:05",
+      "source_language": "ko",
+      "target_language": "en",
+      "display_text": "Even when we feel lost, God is still guiding us.",
+      "status": "final"
+    },
+    {
+      "segment_id": "SEG-004",
+      "timestamp": "2026-05-15T11:07:22",
+      "source_language": "ko",
+      "target_language": "en",
+      "display_text": "Just as God worked in Ruth's life, He also works in our lives.",
+      "status": "final"
+    },
+    {
+      "segment_id": "SEG-005",
+      "timestamp": "2026-05-15T11:08:47",
+      "source_language": "ko",
+      "target_language": "en",
+      "display_text": "We should receive this message not just as a story, but as God's invitation to us today.",
+      "status": "final"
+    }
+  ],
+  "suppressed_examples": [
+    {
+      "segment_id": "HELD-001",
+      "reason": "INCOMPLETE_OUTPUT",
+      "raw_text": "오늘 말씀을 통해...",
+      "displayed_to_viewer": false
+    },
+    {
+      "segment_id": "HELD-002",
+      "reason": "SOURCE_ONLY_NO_TRANSLATION",
+      "raw_text": "하나님께서 우리를...",
+      "displayed_to_viewer": false
+    }
+  ],
+  "viewer_load_example": {
+    "viewer_join_time": "2026-05-15T11:15:00",
+    "behavior": "Load recent final segments first, then continue receiving live updates.",
+    "loaded_segment_ids": [
+      "SEG-001",
+      "SEG-002",
+      "SEG-003",
+      "SEG-004",
+      "SEG-005"
+    ]
+  }
+}
