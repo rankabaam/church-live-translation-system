@@ -1,0 +1,71 @@
+{
+  "note": "Fictional sample translation segments for portfolio demonstration only. No real sermon logs, private church data, personal information, or production credentials are included.",
+  "service_context": {
+    "source_language": "ko",
+    "target_language": "en",
+    "setting": "church_service",
+    "sample_type": "fictional_demo"
+  },
+  "segments": [
+    {
+      "segment_id": "SEG-001",
+      "timestamp": "2026-05-15T11:03:12",
+      "source_stt": "오늘 말씀을 통해 우리가 하나님의 은혜를 다시 기억하기 원합니다.",
+      "cleaned_source": "오늘 말씀을 통해 우리가 하나님의 은혜를 다시 기억하기 원합니다.",
+      "displayed_translation": "Through today's message, we want to remember God's grace again.",
+      "quality_review": {
+        "score": 5,
+        "issue_type": "NONE",
+        "notes": "Clear STT and natural translation."
+      }
+    },
+    {
+      "segment_id": "SEG-002",
+      "timestamp": "2026-05-15T11:04:38",
+      "source_stt": "룻은 보아스를 통해 하나님의 보호하심을 경험하게 됩니다.",
+      "cleaned_source": "룻은 보아스를 통해 하나님의 보호하심을 경험하게 됩니다.",
+      "displayed_translation": "Ruth experiences God's protection through Boaz.",
+      "quality_review": {
+        "score": 5,
+        "issue_type": "NONE",
+        "notes": "Proper nouns are handled correctly."
+      }
+    },
+    {
+      "segment_id": "SEG-003",
+      "timestamp": "2026-05-15T11:06:05",
+      "source_stt": "우리가 때로는 길을 잃은 것 같아도 하나님은 우리를 인도하고 계십니다.",
+      "cleaned_source": "우리가 때로는 길을 잃은 것 같아도 하나님은 우리를 인도하고 계십니다.",
+      "displayed_translation": "Even when we feel lost, God is still guiding us.",
+      "quality_review": {
+        "score": 4,
+        "issue_type": "TRANSLATION_UNNATURAL",
+        "notes": "Translation is clear, but tone could be made slightly more sermon-like."
+      }
+    },
+    {
+      "segment_id": "SEG-004",
+      "timestamp": "2026-05-15T11:07:22",
+      "source_stt": "하나님께서 룻의 삶 가운데 일하셨던 것처럼 우리의 삶 가운데도 일하십니다.",
+      "cleaned_source": "하나님께서 룻의 삶 가운데 일하셨던 것처럼 우리의 삶 가운데도 일하십니다.",
+      "displayed_translation": "Just as God worked in Ruth's life, He also works in our lives.",
+      "quality_review": {
+        "score": 5,
+        "issue_type": "NONE",
+        "notes": "Context and meaning are preserved."
+      }
+    },
+    {
+      "segment_id": "SEG-005",
+      "timestamp": "2026-05-15T11:08:47",
+      "source_stt": "우리는 이 말씀을 단순한 이야기가 아니라 오늘 우리에게 주시는 하나님의 초대라고 받아들여야 합니다.",
+      "cleaned_source": "우리는 이 말씀을 단순한 이야기가 아니라 오늘 우리에게 주시는 하나님의 초대라고 받아들여야 합니다.",
+      "displayed_translation": "We should receive this message not just as a story, but as God's invitation to us today.",
+      "quality_review": {
+        "score": 5,
+        "issue_type": "NONE",
+        "notes": "Good live translation quality."
+      }
+    }
+  ]
+}
