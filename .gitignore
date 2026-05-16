@@ -1,0 +1,44 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.venv/
+venv/
+
+# Environment / secrets
+.env
+.env.*
+*.key
+*.pem
+secrets/
+config.local.*
+local_config.*
+
+# Logs and runtime data
+logs/
+*.log
+runtime/
+cache/
+temp/
+tmp/
+
+# Databases / local storage
+*.db
+*.sqlite
+*.sqlite3
+
+# Real sermon or service files
+recordings/
+audio/
+transcripts/
+real_logs/
+private_data/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Editor files
+.vscode/
+.idea/
