@@ -1,47 +1,50 @@
 # Church Live Translation System
 
-A live Korean-English sermon translation workflow concept for church services.
+A sanitized real-time Korean-English translation system for live worship services, designed around operational reliability, readable output, and low operator burden.
 
 ## Overview
 
-This project documents a real-time church translation support system designed to help Korean-English worship environments display live translated sermon text for attendees.
+The project combines live audio capture, speech-to-text, text cleanup, machine translation, session memory, an operator interface, and a mobile-friendly viewer. This public repository documents the architecture and engineering decisions without exposing production credentials, recordings, private logs, or organization-specific infrastructure.
 
-The system concept focuses on speech-to-text input, translation processing, viewer display, admin control, and iterative quality improvement based on live-service feedback.
+## Technical Direction
 
-## Problem
+- Python and FastAPI service architecture
+- Streaming speech-to-text using a locally hosted model
+- Local neural machine translation
+- Voice activity detection and sentence-boundary handling
+- Glossary-assisted correction for names, Scripture terms, and recurring vocabulary
+- Admin and viewer interfaces with session continuity
+- GPU acceleration where available
+- Post-service log review and regression tracking
 
-In multilingual church services, attendees may need translation support during sermons, announcements, or Scripture readings.
-
-Manual interpretation or delayed translation can make it difficult for some attendees to follow the message in real time.
-
-## Solution
-
-This project demonstrates a live translation workflow that:
-
-- Captures spoken sermon audio
-- Converts speech to text
-- Processes Korean-English translation
-- Displays translated text through a viewer interface
-- Supports admin-side monitoring and control
-- Uses feedback and logs to improve translation quality over time
-
-## Sample Workflow
+## Generalized Architecture
 
 ```text
-Sermon Audio
+Live audio input
       ↓
-Speech-to-Text
+Voice activity detection
       ↓
-Text Cleanup / Correction
+Streaming speech-to-text
       ↓
-Translation
+Cleanup, segmentation, and glossary corrections
       ↓
-Viewer Display
+Machine translation
       ↓
-Feedback Review
+Session state and recent-message memory
       ↓
-Improvement Patch
+Admin monitoring + public viewer
+      ↓
+Post-service feedback and regression review
 ```
+
+## Engineering Priorities
+
+- Prevent incomplete fragments from reaching viewers
+- Preserve enough recent context for late-joining or reconnecting users
+- Keep the operator workflow simple during live services
+- Recover cleanly from audio, browser, or connection interruptions
+- Improve terminology through controlled glossary and correction files
+- Separate production data from public portfolio examples
 
 ## Documentation
 
@@ -53,3 +56,11 @@ Improvement Patch
 - [Viewer Interface](docs/viewer_interface.md)
 - [Session Memory](docs/session_memory.md)
 - [Website Integration](docs/website_integration.md)
+
+## Public Repository Scope
+
+The included scripts and interfaces are simplified demonstrations. They do not contain real audio, service transcripts, production server addresses, credentials, private logs, or organization-specific configuration.
+
+## Current Portfolio Direction
+
+Future public-safe updates may include a more representative FastAPI demo, synthetic streaming input, configurable glossary loading, mock WebSocket updates, and automated checks for sentence suppression and session recovery.
