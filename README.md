@@ -1,66 +1,83 @@
 # Church Live Translation System
 
-A sanitized real-time Korean-English translation system for live worship services, designed around operational reliability, readable output, and low operator burden.
+A sanitized, runnable FastAPI and WebSocket demonstration of a Korean–English live-translation workflow designed around operational reliability, readable output, and low operator burden.
 
-## Overview
+## Runnable Demo
 
-The project combines live audio capture, speech-to-text, text cleanup, machine translation, session memory, an operator interface, and a mobile-friendly viewer. This public repository documents the architecture and engineering decisions without exposing production credentials, recordings, private logs, or organization-specific infrastructure.
-
-## Technical Direction
-
-- Python and FastAPI service architecture
-- Streaming speech-to-text using a locally hosted model
-- Local neural machine translation
-- Voice activity detection and sentence-boundary handling
-- Glossary-assisted correction for names, Scripture terms, and recurring vocabulary
-- Admin and viewer interfaces with session continuity
-- GPU acceleration where available
-- Post-service log review and regression tracking
-
-## Generalized Architecture
-
-```text
-Live audio input
-      ↓
-Voice activity detection
-      ↓
-Streaming speech-to-text
-      ↓
-Cleanup, segmentation, and glossary corrections
-      ↓
-Machine translation
-      ↓
-Session state and recent-message memory
-      ↓
-Admin monitoring + public viewer
-      ↓
-Post-service feedback and regression review
+```bash
+python -m venv .venv
+# Windows: .venv\Scripts\activate
+# macOS/Linux: source .venv/bin/activate
+pip install -r requirements.txt
+uvicorn app.main:app --reload
 ```
 
-## Engineering Priorities
+The browser demo lets an operator submit fictional Korean segments, mark them final or partial, and watch viewer session updates through WebSocket messages.
 
-- Prevent incomplete fragments from reaching viewers
-- Preserve enough recent context for late-joining or reconnecting users
-- Keep the operator workflow simple during live services
-- Recover cleanly from audio, browser, or connection interruptions
-- Improve terminology through controlled glossary and correction files
-- Separate production data from public portfolio examples
+## Public Demo Architecture
 
-## Documentation
+```text
+Synthetic source text
+        ↓
+Whitespace cleanup + correction rules
+        ↓
+Glossary matching
+        ↓
+Model-adapter interface
+        ↓
+Final/partial suppression decision
+        ↓
+Bounded session memory
+        ↓
+FastAPI REST endpoints + WebSocket broadcast
+        ↓
+Mobile-friendly browser viewer
+```
 
-- [System Architecture](docs/system_architecture.md)
-- [Workflow](docs/workflow.md)
-- [Engineering Challenges](docs/engineering_challenges.md)
-- [Translation Quality](docs/translation_quality.md)
-- [Admin Interface](docs/admin_interface.md)
-- [Viewer Interface](docs/viewer_interface.md)
-- [Session Memory](docs/session_memory.md)
-- [Website Integration](docs/website_integration.md)
+The included `DemoTranslator` is deterministic and does not call a production speech-recognition or translation model.
 
-## Public Repository Scope
+## What the Project Demonstrates
 
-The included scripts and interfaces are simplified demonstrations. They do not contain real audio, service transcripts, production server addresses, credentials, private logs, or organization-specific configuration.
+- FastAPI REST and WebSocket service structure
+- Health, processing, session, and clear endpoints
+- Suppression of partial fragments
+- Glossary-assisted terminology visibility
+- Bounded recent-segment memory for late joiners
+- Model-independent pipeline design
+- Synthetic operator/viewer browser workflow
+- Unit-tested correction, suppression, translation, and memory behavior
 
-## Current Portfolio Direction
+## Repository Contents
 
-Future public-safe updates may include a more representative FastAPI demo, synthetic streaming input, configurable glossary loading, mock WebSocket updates, and automated checks for sentence suppression and session recovery.
+| Path | Description |
+|---|---|
+| `app/main.py` | FastAPI app, REST endpoints, WebSocket manager, and browser demo |
+| `app/pipeline.py` | Cleanup, glossary, translation-adapter, and memory logic |
+| `data/glossary_sample.json` | Fictional public glossary |
+| `tests/test_pipeline.py` | Regression tests |
+| `scripts/sample_translation_pipeline.py` | Command-line demonstration |
+| `docs/` | Architecture and integration notes |
+| `requirements.txt` | Demo dependencies |
+
+## API Summary
+
+| Method | Endpoint | Purpose |
+|---|---|---|
+| `GET` | `/health` | Service and mode check |
+| `GET` | `/api/segments` | Current viewer-ready memory |
+| `POST` | `/api/process` | Process a synthetic final or partial segment |
+| `POST` | `/api/session/clear` | Clear the demo session |
+| WebSocket | `/ws` | Receive snapshots and live updates |
+
+## Validation
+
+```bash
+python -m unittest discover -s tests
+python -m py_compile app/pipeline.py app/main.py
+```
+
+## Production Boundary
+
+The operational system uses local speech recognition, neural machine translation, voice activity detection, glossary files, GPU acceleration, live audio, and service-specific controls. Those integrations are not published here.
+
+This repository contains no recordings, transcripts, production model paths, server addresses, credentials, private logs, or organization-specific network configuration.
