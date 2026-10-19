@@ -51,3 +51,30 @@ async def websocket_endpoint(websocket:WebSocket)->None:
 @app.get('/',response_class=HTMLResponse)
 def viewer()->str:
     return '''<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Live Translation Demo</title><style>body{font-family:Arial;max-width:900px;margin:auto;padding:24px;background:#101827;color:#f5f7fb}.panel{background:#1d2939;border:1px solid #344054;border-radius:12px;padding:18px;margin:16px 0}textarea{width:100%;min-height:90px;padding:12px;box-sizing:border-box}button{padding:10px 14px;margin:8px 8px 0 0}.segment{border-left:4px solid #53b1fd;padding:10px 14px;margin:12px 0;background:#182230}.source{color:#98a2b3}.status{float:right;color:#fdb022}</style></head><body><h1>Korean–English Live Translation Demo</h1><p>Fictional model-agnostic demonstration. No microphone, recording, transcript, or production model is connected.</p><div class="panel"><textarea id="source">오늘 말씀을 통해 하나님의 은혜를 기억합니다.</textarea><button onclick="send(true)">Send final</button><button onclick="send(false)">Send partial</button><button onclick="clearSession()">Clear</button></div><div class="panel"><h2>Viewer session</h2><div id="segments"></div></div><script>const box=document.getElementById('segments');function render(items){box.innerHTML=items.map(s=>`<div class="segment"><span class="status">${s.status}</span><div class="source">${s.cleaned_source}</div><div>${s.translated_text||'(suppressed)'}</div></div>`).join('')}async function refresh(){const r=await fetch('/api/segments');render((await r.json()).segments)}async function send(is_final){await fetch('/api/process',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({source_text:document.getElementById('source').value,is_final})})}async function clearSession(){await fetch('/api/session/clear',{method:'POST'})}const protocol=location.protocol==='https:'?'wss':'ws';const ws=new WebSocket(`${protocol}://${location.host}/ws`);ws.onmessage=e=>{const d=JSON.parse(e.data);if(d.type==='session_snapshot'||d.type==='session_cleared')render(d.segments);else refresh()};refresh();</script></body></html>'''
+
+
+# Independent multilingual phrasebook preview. No model, microphone or API keys.
+from typing import Literal
+from fastapi.responses import FileResponse
+from .multilingual_demo import LANGUAGES, translate_sample
+
+class LanguagePreviewRequest(BaseModel):
+    source_text: str = Field(min_length=1, max_length=1000)
+    target_language: Literal["en", "es"] = "en"
+    is_final: bool = True
+    confidence: float | None = Field(default=None, ge=0, le=1)
+    previous_final: str | None = None
+
+@app.get("/api/languages")
+def language_options() -> dict:
+    return {"languages": LANGUAGES, "mode": "offline_phrasebook_demo"}
+
+@app.post("/api/language-demo")
+def process_language_preview(request: LanguagePreviewRequest) -> dict:
+    return translate_sample(request.source_text, language=request.target_language,
+                            is_final=request.is_final, confidence=request.confidence,
+                            previous_final=request.previous_final)
+
+@app.get("/language-demo", response_class=FileResponse)
+def language_demo_viewer():
+    return FileResponse(ROOT / "samples" / "multilingual_viewer_demo.html", media_type="text/html")
