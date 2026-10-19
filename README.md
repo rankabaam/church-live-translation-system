@@ -2,6 +2,20 @@
 
 A sanitized, runnable FastAPI and WebSocket demonstration of a Korean–English live-translation workflow designed around operational reliability, readable output, and low operator burden.
 
+## Portfolio Update: Multilingual Preview (October 2026)
+
+The independent public preview now supports **English/Spanish language selection** at `/language-demo`, using an **offline fixed-phrase dictionary** rather than a real AI translation engine. It demonstrates partial-segment filtering, caller-supplied confidence checks, and cautious handling of unknown phrases (no invented translation). These are generic UI/pipeline examples, **not confirmation that Spanish was deployed to the private operational application**.
+
+```bash
+uvicorn app.main:app --reload
+# In browser: http://127.0.0.1:8000/language-demo
+python -m unittest discover -s tests -v
+```
+
+See [multilingual demo notes](docs/multilingual_preview.md). The original Korean-to-English sample remains available at `/`.
+
+---
+
 ## Runnable Demo
 
 ```bash
