@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Multilingual Viewer — Offline Phrasebook Preview</title>
+<style>
+:root{color-scheme:dark}body{font:16px system-ui,sans-serif;background:#101828;color:#f8fafc;max-width:920px;margin:auto;padding:22px}
+header,.card{padding:22px;background:#202d42;border:1px solid #43536b;border-radius:14px;margin:16px 0}
+h1{margin:0}p,.note{color:#cbd5e1}textarea,select,input{font:inherit;padding:9px;margin:6px 0 14px;box-sizing:border-box}
+textarea{display:block;width:100%;min-height:90px}button{font:inherit;padding:11px 16px;cursor:pointer;border-radius:8px;border:0;background:#69b5f9}
+label{display:block}output{white-space:pre-wrap;display:block;border-left:4px solid #69b5f9;padding:16px;background:#111d2f;min-height:55px}
+@media(max-width:550px){body{padding:10px}header,.card{padding:14px}}
+</style></head><body><header><h1>English / Spanish Language Selection</h1>
+<p>Public portfolio preview — text-only; fictional phrases only; no microphone, cloud API, translation model, or real transcript.</p></header>
+<section class="card"><label for="language">Display language</label><select id="language">
+<option value="en">English</option><option value="es">Español</option></select>
+<label for="source">Fictional Korean input</label><textarea id="source">우리는 서로를 사랑해야 합니다.</textarea>
+<label><input type="checkbox" id="final" checked> Final segment (not partial)</label>
+<label for="confidence">Supplied confidence (optional; demo value)</label><input type="number" id="confidence" min="0" max="1" step="0.05" placeholder="not supplied">
+<button id="run">Preview text</button><p class="note">The API only translates three fixed examples. Unknown sentences are explicitly unavailable, never machine-translated.</p>
+<h2>Viewer preview</h2><output id="result" aria-live="polite">Choose a language and click Preview text.</output></section>
+<script>
+const $ = id => document.getElementById(id);
+$("run").addEventListener("click", async () => {
+  const output = $("result"); output.textContent = "Processing sample...";
+  const body = {source_text:$("source").value, target_language:$("language").value, is_final:$("final").checked};
+  if ($("confidence").value !== "") body.confidence = Number($("confidence").value);
+  try {
+    const response = await fetch("/api/language-demo",{method:"POST",
+      headers:{"content-type":"application/json"},body:JSON.stringify(body)});
+    const data = await response.json();
+    if (!response.ok) throw Error(JSON.stringify(data));
+    output.textContent = (data.translation || "(no translation displayed)") +
+      "\nStatus: " + data.status + "\nReason: " + (data.flags.join(", ") || "fixed sample phrase") +
+      "\nMode: " + data.mode;
+  } catch(error) {output.textContent="Demo server unavailable or request invalid. Open this page via the running FastAPI app at /language-demo.\n"+error.message;}
+});
+</script></body></html>
